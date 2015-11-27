@@ -1,0 +1,105 @@
+.TexArea {
+    height: 80px;
+    width: 500px;
+    /*background: #000000;*/
+}
+#materiass {
+    /*height: 100px;*/
+    width: 403px;
+    /*background: #000000;*/
+}
+#contenido_pestanas ul  {   
+	display: block; 
+	height: 18px;
+	list-style: none outside none;
+
+}
+#contenido_pestanas li  {   
+	margin-bottom: 10px;
+}
+#contenido_pestanas a {
+    float: left; 
+    padding: 5px 15px; /*5px 20px*/
+    list-style: none outside none; 
+    border: 1px solid #999;  
+}
+#contenido_pestanas a:hover {
+    background-color: #4B80BC; 
+    color: #FFFFFF;
+}
+#contenido_pestanas a.aqui  {   
+	background-color: #333; 
+	color: #FFFFFF; 
+	box-shadow: 3px 0px 2px #ccc;
+    -webkit-box-shadow: 3px 0px 2px #ccc; 
+    -moz-box-shadow: 3px 0px 2px #ccc;
+}
+#contenido_pestanas div  { 
+    border: 1px solid #333; 
+    width: 800px;/*100%*/
+    margin-left: 10px;/*40*/
+    margin-top: -6px;/*-6*/
+    background:  #FFFFFF; /*none repeat scroll 0% 0% */
+    padding: 20px; /*20*/
+    box-shadow: 3px 3px 2px #ccc;
+    -webkit-box-shadow: 3px 3px 2px #ccc; 
+    -moz-box-shadow: 3px 3px 2px #ccc;
+}
+a:link, a:visited {
+    color: #4B6BA8;
+    text-decoration: none;
+}
+
+#contenido_pestanas {
+	/*margin-left: 100px; */
+    width: 1000px;/*700*/
+	height: 800px;/*este es tamaño*/
+    /*position:absolute;*/
+}
+#opcion1 *{
+	position: none;
+	margin: 0px;
+	position:none;
+}
+
+
+
+.errorr{
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    -o-box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    border-style: dotted;
+    border-width: 1px;
+    border-color: #DC2F63;/*FF3672*/
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    color: #FF3672;
+    display: none;
+    font-size: 10px;
+    margin-top: -80px;
+    margin-left: 340px;
+    padding: 3px;
+    position: absolute;
+    /*font-size: small;*/
+}
+
+span.arrow {
+    margin-left: 6px;
+    height:17px;
+    background: url('http://i45.tinypic.com/f9ifz6.png') no-repeat left center;
+}
+label.error {
+    height:17px;
+    border-top:1px solid #99182c;
+    border-right:1px solid #99182c;
+    border-bottom:1px solid #99182c;
+    margin-left:9px;
+    padding:1px 5px 0px 5px;
+    font-size:small;
+}
+.scroll{
+    margin: 0px;
+    padding: 0px;
+    float: left;
+    overflow: scroll;
+}

@@ -1,0 +1,535 @@
+body {
+	padding: 0;
+	background: #ffffff;
+	text-align: justify;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #000066;
+	margin-top: 0em;
+	margin-right: 0em;
+	margin-bottom: 0em;
+	margin-left: 0em;  
+}
+td{ font-family:Arial, helvetica, sans-serif; font-size:11px; }
+th{ font-family:Arial, helvetica, sans-serif; font-size:11px; background: #E0F1FC;}//fondo del cuadrito celeste
+#toph    { background: #F0F0F0 url(top.jpg) no-repeat center top; height: 14px; margin: 0px; padding: 0px;}//fondo plomito
+#header  { background: #FFFFFF url(encabezado.jpg) no-repeat center top; width:auto; height: 86px;  padding:  90px; margin: 0px 16px 15px 15px;}
+
+/* FOOTER */
+#pieh  { background: #F0F0F0 url(pie.jpg) no-repeat center top; width:auto; height: 46px;  padding: 0px; margin: 0px 16px 0px 15px;}
+#footer { background: #FFF url(footer.jpg) no-repeat; color: #a0a0a0; height: 43px; text-align: center; font-size: 70%; clear: both; padding: 0px; margin: 0px;}
+#footer a { 	color: #999; background: #FFF;  text-decoration:none; }
+#footer a:hover { 	background: #FFF;	text-decoration: underline; color: #444;}
+/*ul { list-style: none; margin: 0; padding: 0;	}*/
+.Azul		 { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color:#0099FF;}
+.Blanco		 { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color:#FFFFFF;}
+.Celeste	 { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color:#5EF3FF;}
+.Marino		 { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color:#004080;}
+.Naranja	 { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color:#FF6600;}
+.Negro		 { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color:#000000;}
+.Rojo		 { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color:#CC0000;}
+.Verde		 { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color:#009900;}
+.Gris		 { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color:#677689;}
+
+.BgAmarillo{ background-color:#FEFAE0;}
+.BgAzul    { background-color:#F4FAFF;}
+.BgAzulFosc{ background-color:#0099FF;}
+.BgBlanco  { background-color:#FFFFFF;}
+.BgCeleste { background-color:#E0F1FC;}
+.BgGris	  { background-color:#F2F4F4;}
+.BgMarino  { background-color:#2568AB;}
+.BgRojo	  { background-color:#F9E6D5;}
+.BgRojoFosc{ background-color:#CC0000;}
+.BgPuntos  { background-image:url(/img/ajedrez_azul.gif);}
+
+a:active        { text-decoration: none; color: #0099FF; font-size: 10px; }
+a:link          { text-decoration: none; color: #0066cc; font-size: 10px; }
+a:visited 	{ text-decoration: none; color: #8398A7; font-size: 10px; }
+a:visited:hover { text-decoration: none; color: #3399CC; font-size: 10px; }
+a:hover 	{ text-decoration: none; color: #3399CC; font-size: 10px; }
+
+hr { color: #8398A7; }
+
+.cazul    {font-family: Arial, Helvetica, sans-serif;font-size: 15px;font-weight: bold;color: #3C97C8;}
+.cverde1  {font-family: Arial, Helvetica, sans-serif;font-size: 15px;font-weight: bold;color: #3EB5B5;}
+.cverde2  {font-family: Arial, Helvetica, sans-serif;font-size: 15px;font-weight: bold;color: #65C740;}
+.camarilla{font-family: Arial, Helvetica, sans-serif;font-size: 15px;font-weight: bold;color: #FFCC00;}
+.cnaranja {font-family: Arial, Helvetica, sans-serif;font-size: 15px;font-weight: bold;color: #FF9900;}
+.croja    {font-family: Arial, Helvetica, sans-serif;font-size: 15px;font-weight: bold;color: #E14747;}
+
+table.tabla {
+    border-width: 0px;
+    border-spacing: ;
+    border-style: ridge;
+    border-color: blue;
+    border-collapse: collapse;
+    background-color: #fffff0;
+}
+table.tabla td {
+    border-width: 1px;
+    padding: 1px;
+    border-style: outset;
+    border-color: blue;
+    background-color: white;
+    -moz-border-radius: ;
+    font-family: Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 10px; 
+    font-style: normal;
+}
+.casilla {
+    background-color: white;
+    border: 1px solid black;
+} 
+/*
+input[type="checkbox"], input[type="radio"]{
+   background: transparent;
+   border: 0;
+}
+*/
+.Caja{
+    BACKGROUND-COLOR: #ffffff;
+    BORDER-BOTTOM-STYLE: groove;
+    BORDER-LEFT-STYLE: groove;
+    BORDER-RIGHT-STYLE: groove;
+    BORDER-TOP-STYLE: groove;
+    COLOR: #0066cc;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 9px
+}
+.Combo{
+    BACKGROUND-COLOR: #ffffff;
+    BORDER-BOTTOM-STYLE: groove;
+    BORDER-LEFT-STYLE: groove;
+    BORDER-RIGHT-STYLE: groove;
+    BORDER-TOP-STYLE: groove;
+    COLOR: #0066cc;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 9px
+}
+.Boton{
+    BORDER-BOTTOM-STYLE: groove;
+    BORDER-LEFT-STYLE: ridge;
+    BORDER-RIGHT-STYLE: groove;
+    BORDER-TOP-STYLE: ridge;
+    COLOR: #0066cc;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    cursor: hand;
+    background-color: #FFFFFF
+}
+.Botona{
+    BORDER-BOTTOM-STYLE: groove;
+    BORDER-LEFT-STYLE: ridge;
+    BORDER-RIGHT-STYLE: groove;
+    BORDER-TOP-STYLE: ridge;
+    COLOR: #ffffff;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    cursor: hand;
+    background-color: #669999; /*color de los botones
+	border: #999 1px solid; 
+	font-family: Verdana;
+	font-size:11px; 
+	color:#FFFFFF;
+	background-color: #E95045;
+	height:24px;
+	border-bottom-style: inset; 
+	border-bottom-width: 4px;
+	border-right-style: inset;
+	border-right-width: 4px;
+	border-bottom-color:#8F8F8F;
+	border-right-color:#8F8F8F;
+	cursor: hand;*/
+}
+.Botonb{
+    BORDER-BOTTOM-STYLE: ridge;
+    BORDER-LEFT-STYLE: ridge;
+    BORDER-RIGHT-STYLE: ridge;
+    BORDER-TOP-STYLE: ridge;
+    COLOR: #2568AB;;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    cursor: hand;
+    background-color: #FFFFFF
+}
+.Letras{
+    COLOR: #0033cc;
+    FONT-FAMILY: Geneva, Arial, sans-serif;
+    FONT-SIZE: 9pt;
+    FONT-STYLE: normal;
+    FONT-WEIGHT: normal;
+    LINE-HEIGHT: 9pt;
+    TEXT-DECORATION: none
+}
+
+.LetrasB{
+    COLOR: #ffffff;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+    FONT-SIZE: 8pt;
+    background-color:#147cbf
+}
+.LetrasN{
+    COLOR: #000000;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+    FONT-SIZE: 7pt;
+}
+.LetrasP{
+    COLOR: #000000;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+    FONT-SIZE: 8pt;
+}
+.LetrasS{
+    COLOR: #0066cc;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+    FONT-SIZE: 8pt;
+}
+.LetrasMenu{
+    COLOR: black;
+    FONT-FAMILY: Arial Narrow;
+    FONT-SIZE: 10pt;
+    FONT-WEIGHT: normal;
+}
+
+
+
+.LetrasPe{
+    COLOR: #000001;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+    FONT-SIZE: 7pt;
+}
+.LetrasM{
+    COLOR: #000000;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+    FONT-SIZE: 7pt;
+}
+
+
+.pie{
+  font-family: Verdana, Helvetica, sans-serif;
+  font-size: 8px;
+  line-height: 15px;
+  color: #0066cc;
+  background-color:#eaeaea;
+}
+.verticaltext{
+  font: bold 13px Arial;
+  position:absolute;
+  right:3px;
+  top:20px;
+  width:15px;
+}
+.menutitulo{
+  font-family: Verdana,Helvetica,sans-serif;
+  font-size  : 12px;
+  font-weight: bold;
+  color      : #000000;
+  line-height:15px;
+  background-color: #ececdd;
+}
+
+.textbox {
+    width: 70px;
+    border-left : 1px solid #acc6db; 
+    border-right : 1px solid #acc6db; 
+    border-top : 1px solid #acc6db; 
+    border-bottom : 1px solid #acc6db; 
+    background-color : #fff; 
+    font-size : 10px;
+    font-family : Verdana, Arial, Helvetica, sans-serif;
+    color : #000; 
+} 
+.textbox2 {
+    border-left : 1px solid #acc6db; 
+    border-right : 1px solid #acc6db; 
+    border-top : 1px solid #acc6db; 
+    border-bottom : 1px solid #acc6db; 
+    background-color : #fff; 
+    font-size : 10px;
+    font-family : Verdana, Arial, Helvetica, sans-serif; 
+    color : #000;
+}
+.textnotas{
+    width : 30px;
+    border-left : 1px solid #acc6db; 
+    border-right : 1px solid #acc6db; 
+    border-top : 1px solid #acc6db; 
+    border-bottom : 1px solid #acc6db; 
+    background-color : #fff; 
+    font-size : 10px;
+    font-family : Verdana, Arial, Helvetica, sans-serif; 
+    color : #000; 
+} 
+.textcom {
+    border-left : 1px solid #acc6db; 
+    border-right : 1px solid #acc6db; 
+    border-top : 1px solid #acc6db; 
+    border-bottom : 1px solid #acc6db; 
+    background-color : #fff; 
+    font-size : 10px;
+    font-family : Verdana, Arial, Helvetica, sans-serif; 
+    color : #000;
+}
+.submit {
+    color : #fff; 
+    font-family : verdana, arial, helvetica, sans-serif; 
+    font-size : 8pt; 
+    font-weight : bold; 
+    background-color : #6898D0; 
+    border : 1px solid #dadada; 
+    cursor : pointer; 
+}
+/* Css para el grid de datos */
+
+.Grid { 
+	/*border: solid 1px Tan #FFFFFF; */
+	border : 1px solid #dadada; 
+	background-color : #ccccff; 
+	font-family : Verdana, Arial, Helvetica, sans-serif; 
+	font-size : 9px;
+	color: #000000;
+}
+
+.GridHeader {
+    text-align: center;
+    font-weight: bold;
+    background-color: #0066CF;
+    font-family : Verdana, Arial, Helvetica, sans-serif; 
+    font-size : 9px;
+    color : #ffffff;
+}
+
+.GridItem {
+    background-color: #ffffff;
+}
+
+.GridAltItem {
+    background-color: #eeeeee;
+}
+/* FIN de Css para el grid */
+
+/* ------------------------------- */
+/* ----------Este es el menu --------------------- */
+.ddcolortabs{
+padding: 0;
+width: 100%;
+background: transparent;
+voice-family: "\"}\"";
+voice-family: inherit;
+}
+
+.ddcolortabs ul{
+font: normal 11px Arial, Verdana, sans-serif;
+margin:0;
+padding:0;
+list-style:none;
+
+}
+
+.ddcolortabs li{
+display:inline;
+margin:0 2px 0 0;
+padding:0;
+text-transform:uppercase;
+}
+
+.ddcolortabs a{
+float:left;
+color: white;
+//background: black url(media/color_tabs_left.gif) no-repeat left top;
+background: 000033 url(media/color_tabs_left.gif)  no-repeat left top;
+margin:0 2px 0 0;
+padding:0 0 1px 3px;
+text-decoration:none;
+letter-spacing: 1px;
+}
+
+.ddcolortabs a span{
+float:left;
+display:block;
+background: transparent url(media/color_tabs_right.gif) no-repeat right top;
+padding: 4px 8px 2px 7px;
+}
+
+.ddcolortabs a span{
+float:none;
+}
+
+.ddcolortabs a:hover{
+background-color: #c0d9d9;
+}
+
+.ddcolortabs a:hover span{
+background-color: #c0d9d9;
+}
+
+.ddcolortabs .selected a, #ddcolortabs .selected a span{ /*currently selected tab*/
+background-color: #c0d9d9;
+
+}
+
+.ddcolortabsline{
+clear: both;
+padding: 0;
+width: 100%;
+height: 8px;
+line-height: 8px;
+background: #669999;
+border-top: 1px solid #fff; /*Remove this to remove border between bar and tabs*/
+}
+
+/* ######### Style for Drop Down Menu ######### */
+
+.dropmenudiv_a{
+position:absolute;
+top: 0;
+border: 1px solid #669999; /*para la barra que divide con los sub menus*/
+border-top-width: 8px; /*Top border width. Should match height of .ddcolortabsline above*/
+border-bottom-width: 0;
+font:normal 12px Arial;
+line-height:18px;
+z-index:100;
+background-color: white;
+width: 200px;
+visibility: hidden;
+}
+
+.dropmenudiv_a a{
+width: auto;
+display: block;
+text-indent: 5px;
+border-top: 0 solid #678b3f;
+border-bottom: 1px solid #678b3f; /*THEME CHANGE HERE*/
+padding: 2px 0;
+text-decoration: none;
+color: black;
+}
+
+* html .dropmenudiv_a a{ /*IE only hack*/
+width: 100%;
+}
+
+.dropmenudiv_a a:hover{ /*Color para navegar el menu*/
+background-color: #99cccc;
+color: white;
+}
+A.menulink {
+display: block;
+/*width: 198px;*/
+text-align: left;
+text-decoration: none;
+font-family:arial;
+font-size:11px;
+color: #000000;
+BORDER: none;
+border: solid 1px #FFFFFF;
+}
+
+A.menulink:hover {
+border: solid 1px #6100C1;
+background-color:#F0E1FF;
+}
+/* -------------------- */
+TR.odd TH {
+    BORDER-LEFT-COLOR: #ebe5d9; 
+    BACKGROUND: #f7f4ee; 
+    BORDER-BOTTOM-COLOR: #ebe5d9; 
+    BORDER-TOP-COLOR: #ebe5d9; 
+    BORDER-RIGHT-COLOR: #ebe5d9
+}
+TR.odd TD {
+    BORDER-LEFT-COLOR: #ebe5d9; 
+    BACKGROUND: #f7f4ee; 
+    BORDER-BOTTOM-COLOR: #ebe5d9; 
+    BORDER-TOP-COLOR: #ebe5d9; 
+    BORDER-RIGHT-COLOR: #ebe5d9
+}
+TBODY TR:hover TD {
+    BORDER-LEFT-COLOR: #523a0b; 
+    BACKGROUND: #EB5548; /*#FFFF99*/
+    BORDER-BOTTOM-COLOR: #523a0b; 
+    BORDER-TOP-COLOR: #523a0b; 
+    BORDER-RIGHT-COLOR: #523a0b;
+    COLOR: #ffffff;
+}
+TBODY TR:hover TH {
+    BORDER-LEFT-COLOR: #523a0b; 
+    BACKGROUND: #ffffee; 
+    BORDER-BOTTOM-COLOR: #523a0b; 
+    BORDER-TOP-COLOR: #523a0b; 
+    BORDER-RIGHT-COLOR: #523a0b
+}
+/*--------------------- */
+.tablafila tr:hover, .tablafila tr.hilite {
+background-color: #DFE7F2;
+color: #000000;
+}
+
+
+/* Off state for a ARC checkbox */
+/*
+.checkboxOff {
+    display: inline;
+	margin: 0px;
+	    padding: 2px; /* NS 6 problem */
+		padding-left: 20px;
+		    color: #666;
+			line-height: 16px;
+			    font-family: Verdana, Arial, Helvetica, sans-serif;
+				font-size: .8em;
+				    background-image: url(checkbox_off.gif);
+					background-repeat: no-repeat;
+					    background-position: 0% 50%;
+						border: 0px;
+}
+*/
+/* On state for a ARC checkbox */
+/*
+.checkboxOn {
+    display: inline;
+	margin: 0px;
+	    padding: 2px; /* NS 6 problem */
+		padding-left: 20px;
+		    color: #000;
+			line-height: 16px;
+			    font-family: Verdana, Arial, Helvetica, sans-serif;
+				font-size: .8em;
+				    background-image: url(checkbox_on.gif);
+					background-repeat: no-repeat;
+					    background-position: 0% 50%;
+						border: 0px;
+}
+*/
+/* Off state for a ARC checkbox */
+/*
+.altCheckboxOff {
+    display: inline;
+	padding: 20px 2px; /* NS 6 problem */
+	    padding-left: 70px;
+		color: #666;
+		    line-height: 60px;
+			font-family: "Courier New", Courier, mono;
+			    font-size: 1.2em;
+				background-image: url(alt_checkbox_off.gif);
+				    background-repeat: no-repeat;
+					background-position: 0% 50%;
+					    border: 0px;
+						cursor: pointer;
+						}
+*/						
+/* On state for a ARC checkbox */
+/*
+.altCheckboxOn {
+    display: inline;
+	padding: 20px 2px; /* NS 6 problem */
+	    padding-left: 70px;
+		color: #000;
+		    line-height: 60px;
+			font-family: "Courier New", Courier, mono;
+			    font-size: 1.2em;
+				font-weight: bold;
+				    background-image: url(alt_checkbox_on.gif);
+					background-repeat: no-repeat;
+					    background-position: 0% 50%;
+						border: 0px;
+						}
+*/																		

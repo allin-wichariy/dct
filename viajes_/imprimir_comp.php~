@@ -1,0 +1,268 @@
+<?php
+
+  require_once("../class/Smarty.class.php");
+  require_once("../class/uti.inc.php");
+  require_once("../class/encryptor.inc.php");
+  require_once("../class/libuatf/interfaz_nueva.inc.php");
+  require_once("../class/libuatf/menus.inc.php");
+  require_once("../islogin.php");
+   require_once("fpdf/fpdf.php");
+  //$gestion_=$_GET['ges'];
+  //$periodo_=$_GET['per'];
+  $id_viajesito=$_GET['id'];
+  $id_docente = $_SESSION["__doc_id_docente"];
+  //$sig_=$_adm_id_programa;
+  $p        = new TemplateInterfaz();
+  $menu   = new menus();
+  $smarty   = new Smarty;
+  $f    = new uti();
+
+  //$gestion=decrypt($gestion_, 'semilla'); 
+  //$periodo=decrypt($periodo_, 'semilla'); 
+  //$sigla=decrypt($siglaa, 'semilla'); 
+  //die($sig_);
+  $sql="SELECT f.facultad,p.programa,m.materia,m.sigla ,v.lugar_prac,v.distancia,v.pasajeros,v.pasajeros_r,v.fecha_ini,v.fecha_fin,v.fecha_r_ini,v.fecha_r_fin,v.ciudad,v.provincia,v.frontera,v.obj_prac,v.obj_esp,v.horap,v.horar  
+from infraestructura.viajes v,dct_asignaciones a,alm_programas p,alm_programas_facultades f, pln_materias m 
+where v.id='$id_viajesito' and v.id_dct_asignaciones=a.id_dct_asignaciones and a.id_programa=p.id_programa and p.id_facultad=f.id_facultad and a.id_materia=m.id_materia and v.bandera='T'";
+  //$datos=$db->GetRow($sql);
+  $f->Ejecutar($sql);
+  if($f->filas!=0)
+  {
+    $f->Leer(0);
+    $facultad=$f->datos->facultad;
+    $carrera=$f->datos->programa;
+    $materia=$f->datos->materia;
+    $sigla=$f->datos->sigla;
+    $lugar_prac=$f->datos->lugar_prac;
+    $distancia=$f->datos->distancia;
+    $pasajeros=$f->datos->pasajeros;
+    $pasajeros_r=$f->datos->pasajeros_r;
+    $fecha_ini=$f->datos->fecha_ini;
+    $fecha_fin=$f->datos->fecha_fin;
+    $fecha_r_ini=$f->datos->fecha_r_ini;
+    $fecha_r_fin=$f->datos->fecha_r_fin;
+    $ciudad=$f->datos->ciudad;
+    $provincia=$f->datos->provincia;
+    $frontera=$f->datos->frontera;
+    $obj_prac=$f->datos->obj_prac;
+    $obj_esp=$f->datos->obj_esp;
+    $horap=$f->datos->horap;
+    $horar=$f->datos->horar;
+    if($pasajeros_r=="")
+      $pasaje=$pasajeros;
+    else
+      $pasaje=$pasajeros_r;
+    if($fecha_r_ini=="")
+    {
+        $fecha_i=$fecha_ini;
+        $fecha_f=$fecha_fin;
+    }
+    else
+    {
+        $fecha_i=$fecha_r_ini;
+        $fecha_f=$fecha_r_fin;
+    }
+  }
+  $sql2="select cronograma,dia from infraestructura.cronograma where id='$id_viajesito'";
+  $f->Ejecutar($sql2);
+  if($f->filas!=0)
+  {
+      $arrayName = array();
+    for($k=0;$k<$f->filas;$k++)
+    {
+      $f->Leer($k);
+      array_push($arrayName,array(
+            'cronograma'  => $f->datos->cronograma,
+            'dia'=> $f->datos->dia)); 
+      $dur=$k+1;
+    }
+  }
+  $sql3="select (u.paterno||' '||u.materno||' '||u.nombres)as nombres,u.nro_dip from infraestructura.alumnos_via a,alumnos au,uatf_datos u where id='$id_viajesito' and a.id_alumno=au.id_alumno and au.id_ra=u.id_ra order by nombres";
+
+  $f->Ejecutar($sql3);
+  if($f->filas!=0)
+  {
+      $arrayEstu = array();
+    for($q=0;$q<$f->filas;$q++)
+    {
+      $f->Leer($q);
+      array_push($arrayEstu,array(
+            'nombres'  => $f->datos->nombres,
+            'nro_dip'=> $f->datos->nro_dip)); 
+    }
+  }
+
+  $sql4="select nombres,(paterno||' '||materno)as ape, ci from docentes where id_docente='$id_docente'";
+  $f->Ejecutar($sql4);
+  if($f->filas!=0)
+  {
+      $f->Leer(0);
+      $nom_doc=$f->datos->nombres;
+      $ape=$f->datos->ape;
+      $doc_ci=$f->datos->ci;   
+  }
+  /**
+  * 
+  */
+  class MiPdf extends FPDF
+  {
+    
+    //var $gestion;
+    //var $periodo;
+    //var $datos;
+    public function __construct()//$datos,$gestion,$periodo
+    {
+      parent::__construct('P','mm','Letter');
+      //$this->gestion=$gestion;
+      //$this->periodo=$periodo;
+      //$this->datos=$datos;
+      $this->SetAutoPageBreak(true,'25');
+    }
+    public function Header()
+    {
+      $this->Image("fpdf/img/logo_C.N__.png",17,10,0,30,'PNG');
+      //$this->setlinewidth(0.7);
+      //$this->Line(20,43,195,43);
+      $this->Ln(35);
+      
+    }
+    public function Footer()
+    {
+      $this->SetY(-30);
+      $this->SetX(23);
+      $x = $this->GetX();//+20
+      $y = $this->GetY();//-15
+      $this->Image("fpdf/img/Pie_C.N.png",$x,$y,0,28,'PNG');   
+    }
+    public function cuadro($y)
+    {
+        $this->setlinewidth(0.2);
+        $this->Line(10,$y+16,206,$y+16);
+        $this->Line(10,$y,10,$y+16);
+        $this->Line(206,$y,206,$y+16);
+        //$this->SetY($y+20);
+    }
+    public function crono($yyy,$algo_)
+    {
+      /*for($i=0;$i<$algo_;$i++)
+      {
+          $this->SetY($yyy+16);
+          $yyy=$this->GetY();
+          $this->cuadro($yyy);
+          $this->MultiCell(196,4,'OBJETIVO ESPECIFICO DE LA PRACTICA : ',0,'J');
+      }*/
+      foreach ($algo_ as $key => $value) 
+      {
+          
+          $this->SetY($yyy+16);
+          $yyy=$this->GetY();
+          $this->cuadro($yyy);
+          $this->MultiCell(196,4,'Cronograma Dia '.$value['dia'].' : '.$value['cronograma'],0,'J');
+      }
+    }
+    public function estu($t)
+    {
+      $this->SetFont('Arial','B',8);
+      $this->Cell(6,6,utf8_decode('N°'),1,0,'C');
+      $this->Cell(92,6,'NOMBRES Y APELLIDOS',1,0,'C');
+      $this->Cell(19,6,'C.I.',1,0,'C');
+      $this->Cell(79,6,'FIRMA',1,1,'C');
+      $this->SetFont('Arial','',8);
+      /*for($j=0;$j<$t;$j++)
+      {
+          $this->Cell(6,6,$j+1,1,0,'C');
+          $this->Cell(92,6,'Nombre Estudiante y apellido',1,0,'L');
+          $this->Cell(19,6,'66120191254',1,0,'C');
+          $this->Cell(79,6,'',1,1,'C');
+      }*/$con=0;
+      foreach ($t as $key1 => $value1) 
+      {
+          $con++;
+          $this->Cell(6,6,$con,1,0,'C');
+          $this->Cell(92,6,utf8_decode($value1['nombres']),1,0,'L');
+          $this->Cell(19,6,utf8_decode($value1['nro_dip']),1,0,'C');
+          $this->Cell(79,6,'',1,1,'C');
+      }
+    }    
+  }
+  
+  $pdf= new MiPdf();//$datos,$gestion,$periodo
+  
+  $pdf->AddPage();
+
+  $pdf->SetFont('Arial','B',9);
+  ///ESTA ES LA TABLA
+  //$pdf->BasicTable($tabla);
+  $pdf->cell(0,7,'SOLICITUD DE VIAJE DE PRACTICA DE CAMPO','T',1,'C');
+  $pdf->SetFont('Arial','',7);
+  $pdf->cell(98,7,utf8_decode('FACULTAD : '.$facultad),1,0,'L');
+  //$pdf->cell(98,7,'FACULTAD : '."BFB",1,0,'L');
+  $pdf->cell(98,7,utf8_decode('CARRERA : '.$carrera),1,1,'L');
+  $pdf->cell(170,7,utf8_decode('ASIGNATURA : '.$materia),'LTB',0,'L');
+  $pdf->cell(26,7,utf8_decode('SIGLA : '.$sigla),'TRB',1,'L');
+  $pdf->cell(196,7,utf8_decode('LUGAR DE LA PRACTICA : '.$lugar_prac),1,1,'L');
+  $pdf->cell(98,7,utf8_decode('DISTANCIA : '.$distancia.'   Km.'),1,0,'L');
+  $pdf->cell(98,7,utf8_decode('DURACION DEL VIAJE :  '.$dur.'  Dias.'),1,1,'L');
+  $pdf->cell(196,7,'DIAS A PERNOCTAR EN :          Ciudad: '.$ciudad.' dias,          Provincia: '.$provincia.' dias,          Frontera: '.$frontera.' dias',1,1,'L');
+  $pdf->cell(196,7,'NUMERO DE PARTICIPANTES :              Docentes   :   1,               Estudiantes   :   '.$pasaje,1,1,'L');
+  $pdf->cell(98,7,'FECHA DE PARTIDA :   '.$fecha_i,1,0,'L');
+  $pdf->cell(98,7,'FECHA DE RETORNO :   '.$fecha_f,1,1,'L');
+  $pdf->cell(98,7,'HORA DE PARTIDA :   '.$horap,1,0,'L');
+  $pdf->cell(98,7,'HORA DE RETORNO :   '.$horar,1,1,'L');  
+  //$pdf->cell(196,7,'HORA DE RETORNO :   20:08 P.M.',1,1,'L');
+  $yy=$pdf->GetY();
+  $pdf->cuadro($yy);
+  //$pdf->MultiCell(196,16,$pdf->MultiCell(196,4,'OBJETIVO GENERAL DE LA PRACTICA : '.'hdgnhjkfng FJKASJKLDFVLASDJKF DFKJGNJKDFHGJKHDFJK DKFJGBJKADFGBJK hdgnhjkfng FJKASJKLDFVLASDJKF DFKJGNJKDFHGJKHDFJK DKFJGBJKADFGBJK SDKFJGJKDFGJKBSDFJK SDKJFGBJKSDFGBJK SKDJFGJKSDFGJKMN DFJKGJKSDFGJKSDBFJKGJK KJDFBGJKDFGBDFKJGB DKFJBGJKSDFGKJSDF KSDFJGKSDJFGB hjkfg','LT','L'),0,'C');
+  $pdf->MultiCell(196,4,utf8_decode('OBJETIVO GENERAL DE LA PRACTICA : '.$obj_prac),'LT','J');
+  $pdf->SetY($yy+16);
+  $yy=$pdf->GetY();
+  $pdf->cuadro($yy);
+  $pdf->MultiCell(196,4,utf8_decode('OBJETIVO ESPECIFICO DE LA PRACTICA : '.$obj_esp),0,'J');
+  $r=5;
+  $pdf->crono($yy,$arrayName);
+  $pdf->ln(10);
+  $pdf->AddPage();
+  $pdf->SetFont('Arial','',8);
+  $pdf->MultiCell(196,4,utf8_decode('COMPROMISO Y NOMINA DE PARTICIPANTES: Los participantes en el viaje de práctica solicitado en el presente formulario, que nos registramos y suscribimos en la nómina siguiente, manifestamos que conocemos plenamente el Reglamento de Prácticas de la Universidad Autónoma Tomás Frías y nos comprometemos a su fiel cumplimiento, dejando claramente establecido que somos responsables de las implicancias legales del incumplimiento del Reglamento mencionado, así como del cronograma del viaje de prácticas indicado en éste formulario, dejando plenamente establecido que cualquier hecho fortuito que genere daños en los bienes universitarios como en la integridad corporal de estudiantes y docentes, es de entera responsabilidad individual, comprometiéndonos a su resarcimiento de manera solidaria y mancomunada; así como es de entera responsabilidad de cada participante las emergencias resultantes de enfermedades congénitas, en proceso de tratamiento y/o curación, debidamente certificadas por el médico estudiantil. Para constancia suscribimos el presente documento en forma voluntaria.'),1,'J');
+  $pdf->estu($arrayEstu);
+  $pdf->cell(98,7,utf8_decode('FIRMA DOCENTE SOLICITANTE: '.$nom_doc),'LTR',0,'L');
+  $pdf->cell(98,7,'FIRMA PRESIDENTE DE CURSO: ','LTR',1,'L');
+  $pdf->cell(98,7,utf8_decode($ape),'LR',0,'L');
+  $pdf->cell(98,7,'','LR',1,'L');
+  $pdf->cell(98,7,'C.I.:   '.$doc_ci,'LRB',0,'L');
+  $pdf->cell(98,7,'C.I.:','LRB',1,'L');
+  $pdf->cell(196,7,utf8_decode('AUTORIZAN EL PRESENTE VIAJE DE PRACTICA LOS SEÑORES'),'LTR',1,'C');
+  $pdf->cell(196,7,'','LR',1,'C');
+  $pdf->cell(196,7,'','LR',1,'C');
+  $pdf->cell(98,7,'DIRECTOR DE CARRERA','LB',0,'C');
+  $pdf->cell(98,7,'DECANO','RB',1,'C');
+  $pdf->cell(196,7,'','LR',1,'C');
+  $pdf->cell(196,7,'','LR',1,'C');
+  $pdf->cell(196,7,utf8_decode('Msc. Lic. María Teresa Jiménez Zamora'),'LR',1,'C');
+  $pdf->cell(196,3,utf8_decode('DIRECTORA DE SERVICIOS ACADEMICOS'),'LBR',1,'C');
+  $pdf->cell(196,5,'ATENCION DEPARTAMENTO DE INFRAESTRUCTURA','LR',1,'L');
+  $pdf->cell(196,7,utf8_decode('a) Vehículo asignado:'),'LRB',1,'L');
+  $pdf->cell(196,7,utf8_decode('b) Días de viaje autorizados:'),1,1,'L');
+  $pdf->cell(196,7,utf8_decode('c) Lugares de viaje autorizados:'),1,1,'L');
+  $pdf->cell(196,7,utf8_decode('d) Distancia a recorrer máxima:'),1,1,'L');
+  $pdf->cell(196,7,utf8_decode('e) Fecha partida:'),1,1,'L');
+  $pdf->cell(196,7,utf8_decode('f) Fecha retorno:'),1,1,'L');
+  $pdf->cell(196,7,utf8_decode('g) Combustible asignado:'),1,1,'L');
+  $pdf->cell(196,7,utf8_decode('h) Imprevistos asignados:'),1,1,'L');
+  $pdf->cell(196,7,utf8_decode('i) Peajes asignados:'),1,1,'L');
+  $pdf->cell(196,7,utf8_decode('j) Chofer asignado:'),1,1,'L');
+  $pdf->cell(196,7,'OBSERVACIONES:','LRT',1,'L');
+  $pdf->cell(196,7,'','LR',1,'L');
+  $pdf->cell(196,7,'','LRB',1,'L');
+  $pdf->cell(98,7,'','LRT',0,'L');
+  $pdf->cell(98,7,'','LRT',1,'L');
+  $pdf->cell(98,7,'','LR',0,'L');
+  $pdf->cell(98,7,'','LR',1,'L');
+  $pdf->cell(98,7,'Firma Enc. Servicios Generales','LRB',0,'C');
+  $pdf->cell(98,7,'Firma Jefe Infraestructura','LRB',1,'C');
+  //$pdf->footeer();
+  $pdf->output();
+
+?>
+
+

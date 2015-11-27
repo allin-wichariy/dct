@@ -1,0 +1,14 @@
+@charset "utf-8";
+
+
+
+
+.TBODY TR:hover TD {
+    BACKGROUND: #FF8484; /*#FFFF99*/
+}
+
+.tablafila tr:hover, .tablafila tr.hilite {
+background-color: #DFE7F2;
+color: #000000;
+}
+

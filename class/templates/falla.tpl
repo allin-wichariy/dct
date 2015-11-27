@@ -1,0 +1,1 @@
+<blink><b>{$mensaje}</b></blik>
